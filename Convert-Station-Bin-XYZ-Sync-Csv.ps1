@@ -24,8 +24,7 @@ if (-not (Test-Path $finalPath)) {
     $finalPath = Join-Path (Get-Location) $CsvPath
 }
 if (-not (Test-Path $finalPath)) {
-    Write-Error "找不到 CSV 文件: $CsvPath (尝试路径: $finalPath)"
-    Write-Error "退出"
+    Write-Error "找不到 CSV 文件: $CsvPath (尝试路径: $finalPath)`n使用 -CsvPath 参数指定文件"
     exit
 }
 # ────────────────────────────────────────────────────────────────
@@ -94,8 +93,7 @@ if (-not (Test-Path $finalPriority)) {
     $finalPriority = Join-Path (Get-Location) $CsvPriority
 }
 if (-not (Test-Path $finalPriority)) {
-    Write-Error "无优先 CSV 文件: $CsvPriority (尝试路径: $finalPriority)"
-    Write-Error "忽略优先 CSV 文件继续处理"
+    Write-Warning "无优先 CSV 文件: $CsvPriority (尝试路径: $finalPriority)`n忽略优先 CSV 文件继续处理或使用 -CsvPriority 参数指定文件"
 } else {
     $pParser = New-Object Microsoft.VisualBasic.FileIO.TextFieldParser($finalPriority, [System.Text.Encoding]::UTF8)
     $pParser.TextFieldType = [Microsoft.VisualBasic.FileIO.FieldType]::Delimited
